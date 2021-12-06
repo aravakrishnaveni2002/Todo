@@ -3,9 +3,122 @@
         <title>
             <%= title %>
         </title>
+
+        <link rel="stylesheet" href="/css/home.css">
     </head>
 
     <body>
-        <h1><%= title %></h1>
+        
+        <div id="container">
+            
+            <div id="heading">
+                 TODO App
+            </div>
+
+            <div id="description-area">
+                <div class="header margin-left">
+                    Description
+                </div>
+                <textarea class="margin-left" name="description" id="description" cols="30" rows="10" placeholder="What do you need to do?"></textarea>
+            </div>
+
+            <div id="details">
+
+                <div id="category-area">
+                    <div class="header margin-left">
+                        category
+                    </div>
+
+                    <form class="margin-left" action="">
+                        <span>choose a category</span>
+                        <select name="category">
+                            <option value="null"></option>
+                            <option value="school">school</option>
+                            <option value="work">work</option>
+                        </select>
+                    </form>
+                </div>
+
+                <div id="due-date-area">
+                    <div class="header margin-left">
+                        due date
+                    </div>
+
+                    <input class="margin-left" id="due-date" type="date">
+                </div>
+
+            </div>
+
+            <div id="buttons">
+
+                <div>
+
+                    <button id="add" class="button-display" type="submit">
+                        <i class="fas fa-plus"></i>
+                        Add Task
+                    </button>
+
+                    <button id="delete" class="button-display" type="submit">
+                        <i class="fas fa-trash-alt"></i>
+                        Delete Task
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="card-area">
+
+                <div class="card">
+
+                    <div id="info">
+                        <!-- <i id="close" class="fas fa-window-close margin-left"></i> -->
+                        <input type="checkbox" class="checkbox" name="checkbox" value="true">
+                        <div id="card-info" class="margin-left">
+                            <span>Why not add a task</span>
+                            <div id="date">
+                                <i class="fas fa-calendar-alt"></i>
+                                May 2, 2019
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-info">
+                        school
+                    </div>
+                    
+                </div>
+
+
+                <div class="card">
+
+                    <div id="info">
+                        <!-- <i id="close" class="fas fa-window-close margin-left"></i> -->
+                        <input type="checkbox" class="checkbox" name="checkbox" value="true">
+                        <div id="card-info" class="margin-left">
+                            <span>Why not add a task</span>
+                            <div id="date">
+                                <i class="fas fa-calendar-alt"></i>
+                                May 2, 2019
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cat-info">
+                        school
+                    </div>
+                    
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+        <script src="https://kit.fontawesome.com/071baab2d8.js" crossorigin="anonymous"></script>
+
+        <script src="/js/home.js"></script>
     </body>
 </html>
