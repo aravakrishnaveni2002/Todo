@@ -15,110 +15,138 @@
                  TODO App
             </div>
 
-            <div id="description-area">
-                <div class="header margin-left">
-                    Description
-                </div>
-                <textarea class="margin-left" name="description" id="description" cols="30" rows="10" placeholder="What do you need to do?"></textarea>
-            </div>
+            <form action="/add-task" id="add-form" method="POST">
 
-            <div id="details">
-
-                <div id="category-area">
+                <div id="description-area">
                     <div class="header margin-left">
-                        category
+                        Description
+                    </div>
+                    
+                    <textarea class="margin-left" name="description" id="description" cols="30" rows="10" placeholder="What do you need to do?"></textarea>
+                    
+                </div>
+
+                <div id="details">
+
+                    <div id="category-area">
+                        <div class="header margin-left">
+                            category
+                        </div>
+
+                        <!-- <form class="margin-left"> -->
+                            <span class="margin-left" >choose a category</span>
+                            <select class="margin-left" name="category" id="category">
+                                <option value=""></option>
+                                <option value="school">school</option>
+                                <option value="work">work</option>
+                            </select>
+                        <!-- </form> -->
                     </div>
 
-                    <form class="margin-left" action="">
-                        <span>choose a category</span>
-                        <select name="category">
-                            <option value="null"></option>
-                            <option value="school">school</option>
-                            <option value="work">work</option>
-                        </select>
-                    </form>
-                </div>
+                    <div id="due-date-area">
+                        <div class="header margin-left">
+                            due date
+                        </div>
 
-                <div id="due-date-area">
-                    <div class="header margin-left">
-                        due date
+                        <!-- <form action="/add-task" method="POST"> -->
+                        <input class="margin-left" id="due_date" name="due_date" type="date">
+                        <!-- </form> -->
                     </div>
 
-                    <input class="margin-left" id="due-date" type="date">
                 </div>
 
-            </div>
 
-            <div id="buttons">
+                
 
-                <div>
+                <div id="buttons">
 
-                    <button id="add" class="button-display" type="submit">
-                        <i class="fas fa-plus"></i>
-                        Add Task
-                    </button>
+                    <div>
 
-                    <button id="delete" class="button-display" type="submit">
-                        <i class="fas fa-trash-alt"></i>
-                        Delete Task
-                    </button>
+                        <!-- <form action="/add-task" method="POST"> -->
+                        <!-- <a href="/add-task">     -->
+                        <button id="add" class="button-display" name="add" type="submit">
+                            <i class="fas fa-plus"></i>
+                            Add Task
+                        </button>
+                        <!-- </a> -->
+                        <!-- <input type="text" name="gghgh"> -->
+            </form>
+                        
+                        <form action="/delete-task" id="delete-form" method="POST">
+                            <button id="delete" class="button-display" type="submit">
+                                <i class="fas fa-trash-alt"></i>
+                                Delete Task
+                            </button>
+                        <!-- </form> -->
+
+                        
+
+                    </div>
 
                 </div>
 
-            </div>
-
+            <!-- </form> -->
+            
             <div id="card-area">
 
-                <div class="card">
+                <% for(let i=0;i<todo_list.length;i++) {%>    
+                    <% if(todo_list[i].description != "") {%>    
+                        <div class="card">
 
-                    <div id="info">
-                        <!-- <i id="close" class="fas fa-window-close margin-left"></i> -->
-                        <input type="checkbox" class="checkbox" name="checkbox" value="true">
-                        <div id="card-info" class="margin-left">
-                            <span>Why not add a task</span>
-                            <div id="date">
-                                <i class="fas fa-calendar-alt"></i>
-                                May 2, 2019
+                            <div id="info">
+
+                                <input type="checkbox" class="checkbox" name="checkbox" value=<%=i %>>
+                                <div id="card-info" class="margin-left">
+                                    <span><%= todo_list[i].description%></span>
+
+                                    <% if(todo_list[i].due_date != "") {%>
+                                        <div id="date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <%= todo_list[i].due_date %>
+                                        </div>
+                                    <% } else {%>
+                                        <div id="date">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            No Due Date
+                                        </div>
+
+                                    <% } %>    
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
 
-                    <div id="cat-info">
-                        school
-                    </div>
+                            <% if(todo_list[i].category != "") {%>
+
+                                <% if(todo_list[i].category == "school") {%>
+                                    <div class="cat-info" id="orange">
+                                        <%= todo_list[i].category %>
+                                    </div>
+                                <% } else{%>
+                                    <div class="cat-info" id="purple">
+                                        <%= todo_list[i].category %>
+                                    </div>
+                                <% } %>    
+
+                            <% } %>
                     
-                </div>
-
-
-                <div class="card">
-
-                    <div id="info">
-                        <!-- <i id="close" class="fas fa-window-close margin-left"></i> -->
-                        <input type="checkbox" class="checkbox" name="checkbox" value="true">
-                        <div id="card-info" class="margin-left">
-                            <span>Why not add a task</span>
-                            <div id="date">
-                                <i class="fas fa-calendar-alt"></i>
-                                May 2, 2019
-                            </div>
                         </div>
-                    </div>
-
-                    <div id="cat-info">
-                        school
-                    </div>
-                    
-                </div>
-
-
+                    <% } %>    
+                <% } %>
+                
 
             </div>
+
+            </form>
+
+            
 
         </div>
 
 
         <script src="https://kit.fontawesome.com/071baab2d8.js" crossorigin="anonymous"></script>
 
-        <script src="/js/home.js"></script>
+        <script src="/js/jquery-3.6.0.js"></script>
+
+        <script type="text/javascript" src="/js/home.js"></script>
     </body>
 </html>
