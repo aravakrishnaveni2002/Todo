@@ -1,9 +1,13 @@
 
 
-const { TodoList } = require('../assets/js/todo_list.js');
+// const { TodoList } = require('../assets/js/todo_list.js');
+
+const db = require('../config/mongoose');
+
+const TodoList = require('../models/todolist');
 
 module.exports.addTask = function(request,response){
-    
+
     // console.log(request.body);
    
 
@@ -14,14 +18,21 @@ module.exports.addTask = function(request,response){
         // console.log(due);
         due = changeInDateFormat(due);
     }    
-    TodoList.push({
+    TodoList.create({
         description: request.body.description,
         category: request.body.category,
         due_date: due,
-        checkbox: "false"
+    },function(err,newTask){
+        if(err){
+            console.log("Error in creating the contact");
+            return;
+        }
+
+        console.log("*****",newTask);
+        return response.redirect('back');
     });
 
-    return response.redirect('back');
+    // return response.redirect('back');
 }
 
 function changeInDateFormat(due_date){

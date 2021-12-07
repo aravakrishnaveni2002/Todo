@@ -12,6 +12,7 @@ router.get('/',homeController.home);
 router.use('/add-task',require('./add_task'));
 
 router.use('/delete-task',require('./delete_task'));
+
 // router.post('/add-task',homeController.addTask);
 
 // router.post('/delete-task',homeController.deleteTask);

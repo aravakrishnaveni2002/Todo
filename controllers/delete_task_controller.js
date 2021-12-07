@@ -1,5 +1,9 @@
 
-const {TodoList} = require('../assets/js/todo_list.js');
+// const {TodoList} = require('../assets/js/todo_list.js');
+
+const db = require('../config/mongoose');
+
+const TodoList = require('../models/todolist');
 
 module.exports.deleteTask = function(request,response){
 
@@ -8,20 +12,48 @@ module.exports.deleteTask = function(request,response){
     var req = request.body;
 
     if(Object.keys(req).length == 0){
-        // console.log("Empty");
+        console.log("Empty");
+        return response.redirect('back');
+    }
+
+    // console.log(typeof(req.checkbox));
+
+    // if(typeof(req.checkbox) == 'string'){
+    //     console.log("true");
+    // }
+
+    // else{
+    //     console.log("false");
+    // }
+
+    if(typeof(req.checkbox) == 'string'){
+        var id = req.checkbox;
+        TodoList.findByIdAndDelete(id,function(err){
+            if(err){
+                console.log("Error in deleting the db");
+                return;
+            }
+            
+        });
+
         return response.redirect('back');
     }
 
     // console.log(req.checkbox);
 
     var checkboxList = req.checkbox;
+    // console.log(checkboxList.length);
 
-    var p = 0;
 
     for(let i=0;i<checkboxList.length;i++){
-        var index = checkboxList[i];
-        TodoList.splice(index-p,1);
-        p++;
+        var id = checkboxList[i];
+        TodoList.findByIdAndDelete(id,function(err){
+            if(err){
+                console.log("Error in deleting the db");
+                return;
+            }
+            
+        });
     }    
 
     return response.redirect('back');
